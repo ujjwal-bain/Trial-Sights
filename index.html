@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCN PEG TrialSight - Clinical Trials Analysis Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="background-gradient">
+            <div class="background-blur blur-1"></div>
+            <div class="background-blur blur-2"></div>
+            <div class="background-blur blur-3"></div>
+        </div>
+        
+        <div class="container">
+            <div class="landing-content">
+                <h1 class="main-title">BCN PEG TrialSight - Clinical Trials Analysis Portal</h1>
+                
+                <p class="subtitle">
+                    Empowering clinical trial analysis with precision and confidence through curated data and industry-standard methodologies.
+                </p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="database"></i>
+                        </div>
+                        <h3>Curated Data</h3>
+                        <p>Access to ClinicalTrials.gov and Citeline TrialTrove databases</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="filter"></i>
+                        </div>
+                        <h3>Advanced Filtering</h3>
+                        <p>Industry-standard filters for precise analysis</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <h3>Standardized Analysis</h3>
+                        <p>Developed with Bain's Global HC LT expertise</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="bar-chart-3"></i>
+                        </div>
+                        <h3>Insights Ready</h3>
+                        <p>Generate customized trial data insights</p>
+                    </div>
+                </div>
+                
+                <button id="start-analysis-btn" class="primary-button">
+                    Start Analysis
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters Page -->
+    <div id="filters-page" class="page">
+        <div class="background-gradient">
+            <div class="background-blur blur-1"></div>
+            <div class="background-blur blur-2"></div>
+            <div class="background-blur blur-3"></div>
+        </div>
+        
+        <div class="container">
+            <div class="back-button-container">
+                <button id="back-to-landing" class="back-button">
+                    <i data-lucide="arrow-left"></i>
+                    Back to landing page
+                </button>
+            </div>
+            
+            <div class="page-header">
+                <h1 class="page-title">BCN PEG TrialSight - Clinical Trials Analysis Portal</h1>
+            </div>
+            
+            <!-- Data Source Selection -->
+            <div class="data-source-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3>Choose Data Source</h3>
+                </div>
+                
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="dataSource" value="default" checked>
+                        <span>ClinicalTrials.gov + Citeline TrialTrove (Default)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="dataSource" value="ct-only">
+                        <span>ClinicalTrials.gov only</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="dataSource" value="tt-only">
+                        <span>Citeline TrialTrove only</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Analysis Filters -->
+            <div class="filters-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i data-lucide="bar-chart-3"></i>
+                    </div>
+                    <h2>Analysis Filters</h2>
+                </div>
+                
+                <div class="filters-grid">
+                    <!-- Trial Start Date Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="calendar"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Trial Start Date</h3>
+                                <p>Define the date range for trial analysis</p>
+                            </div>
+                            <div class="tooltip-icon" data-tooltip="Watch-out: Using trials from the last 1-2 quarters in forecasts">
+                                <i data-lucide="info"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="date-inputs">
+                            <div class="date-group">
+                                <label>From (Month/Year)</label>
+                                <div class="date-selects">
+                                    <select id="from-month">
+                                        <option value="1" selected>January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                    <select id="from-year">
+                                        <!-- Years will be populated by JavaScript -->
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="date-group">
+                                <label>Until (Month/Year)</label>
+                                <div class="date-selects">
+                                    <select id="until-month">
+                                        <!-- Months will be populated by JavaScript -->
+                                    </select>
+                                    <select id="until-year">
+                                        <!-- Years will be populated by JavaScript -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="date-error" class="error-message hidden">
+                            Please select a valid date range. The "Until" date cannot be in the future or before the "From" date.
+                        </div>
+                    </div>
+                    
+                    <!-- Region Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="globe"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Region</h3>
+                                <p>Filter trials by geographic region</p>
+                            </div>
+                            <div class="tooltip-icon" data-tooltip="Commonly: All regions included by default">
+                                <i data-lucide="info"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="region-enabled">
+                                <span>Enable region filter</span>
+                            </label>
+                        </div>
+                        
+                        <select id="region-select" disabled>
+                            <option value="global">Global</option>
+                            <option value="na">North America only</option>
+                            <option value="eu">European Union only</option>
+                            <option value="apac">APAC only</option>
+                            <option value="euapac">EU and APAC</option>
+                            <option value="naapac">North America and APAC</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Phase Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="beaker"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Phase</h3>
+                                <p>Select clinical trial phases</p>
+                            </div>
+                            <div class="tooltip-icon" data-tooltip="Commonly: Interphase trials mapped to later phases in TrialTrove (i.e., I/II goes to II)">
+                                <i data-lucide="info"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-grid">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="I" checked>
+                                <span>I</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="I/II" checked>
+                                <span>I/II</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="II" checked>
+                                <span>II</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="II/III" checked>
+                                <span>II/III</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="III" checked>
+                                <span>III</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="III/IV" checked>
+                                <span>III/IV</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="IV" checked>
+                                <span>IV</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="phase" value="Others">
+                                <span>Others</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Study Design Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="file-text"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Study Design</h3>
+                                <p>Choose study methodology type</p>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="study-design" value="Interventional" checked>
+                                <span>Interventional</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="study-design" value="Observational">
+                                <span>Observational</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Trial Status Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Trial Status</h3>
+                                <p>Filter by current trial status</p>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-grid">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="trial-status" value="Open" checked>
+                                <span>Open</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="trial-status" value="Closed" checked>
+                                <span>Closed</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="trial-status" value="Temporarily Closed" checked>
+                                <span>Temporarily Closed</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="trial-status" value="Completed">
+                                <span>Completed</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="trial-status" value="Terminated">
+                                <span>Terminated</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Lead Sponsor Type Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="building"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Lead Sponsor Type</h3>
+                                <p>Filter by sponsor category</p>
+                            </div>
+                            <div class="tooltip-icon" data-tooltip="Commonly: Industry sponsored trials only">
+                                <i data-lucide="info"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="sponsor-type" value="Industry" checked>
+                                <span>Industry</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="sponsor-type" value="Non-Industry">
+                                <span>Non-Industry</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="sponsor-type" value="Unknown">
+                                <span>Unknown</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Scale Up Factor Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <i data-lucide="percent"></i>
+                            </div>
+                            <div class="filter-title">
+                                <h3>Scale Up Factor</h3>
+                                <p>Adjust for unreported trials</p>
+                            </div>
+                        </div>
+                        
+                        <div class="slider-container">
+                            <input type="range" id="scale-factor" min="0" max="25" value="0" class="slider">
+                            <div class="slider-labels">
+                                <span>0%</span>
+                                <span id="scale-value" class="current-value">0%</span>
+                                <span>25%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="reset-filters" class="secondary-button">Reset Filters</button>
+                <button id="submit-request" class="primary-button">Submit Request</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="results-page" class="page">
+        <div class="container">
+            <div class="back-button-container">
+                <button id="back-to-filters" class="back-button">
+                    <i data-lucide="arrow-left"></i>
+                    Back to Filters
+                </button>
+            </div>
+            
+            <div class="page-header">
+                <h1 class="page-title">BCN PEG TrialSight - Clinical Trials Analysis Portal</h1>
+                <p class="page-subtitle">Your analysis request is being processed</p>
+            </div>
+            
+            <div class="results-content">
+                <!-- Progress Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div id="status-icon" class="status-icon processing">
+                                <i data-lucide="clock"></i>
+                            </div>
+                            Analysis Progress
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-section">
+                            <div class="progress-info">
+                                <span id="current-step">Initializing analysis...</span>
+                                <span id="progress-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="status-section">
+                            <div class="status-info">
+                                <span class="status-label">Current Status:</span>
+                                <span id="status-text" class="status-value processing">Processing</span>
+                            </div>
+                            <p id="status-description" class="status-description">
+                                Please wait while we process your trial data request. This typically takes 2-3 minutes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Request Details Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Request Details</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="details-grid">
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <span class="detail-label">Requested Date:</span>
+                                    <p id="request-date" class="detail-value"></p>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Username:</span>
+                                    <p class="detail-value">john.analyst@bain.com</p>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Request ID:</span>
+                                    <p class="detail-value">52512</p>
+                                </div>
+                            </div>
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <span class="detail-label">Date Range:</span>
+                                    <p class="detail-value">January 2015 - July 2025</p>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Estimated Results:</span>
+                                    <p class="detail-value">~15,000 trials</p>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Data Source:</span>
+                                    <p class="detail-value">CT + TT (Default)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="start-another" class="secondary-button" disabled>
+                        <i data-lucide="share-2"></i>
+                        Start another analysis
+                    </button>
+                    <button id="download-results" class="primary-button" disabled>
+                        <i data-lucide="download"></i>
+                        Download Results
+                    </button>
+                </div>
+                
+                <!-- Success Card (hidden initially) -->
+                <div id="success-card" class="card success-card hidden">
+                    <div class="card-content">
+                        <div class="success-content">
+                            <div class="success-icon">
+                                <i data-lucide="check-circle"></i>
+                            </div>
+                            <h3>Analysis Complete!</h3>
+                            <p>Your BCN PEG TrialSights analysis has been successfully generated. The results include detailed trial data, statistical insights, and visualization charts ready for your presentation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

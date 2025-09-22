@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Redesigned landing page with clean, minimal professional design inspired by the design brief -->
+<div class="landing-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Advanced clinical trial analysis
+                <span class="hero-accent">made simple</span>
+            </h1>
+            
+            <p class="hero-description">
+                Empowering clinical trial analysis with precision and confidence through 
+                curated data and industry-standard methodologies developed with Bain's Global HC LT expertise.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="{{ url_for('filters') }}" class="btn-primary">
+                    Start Analysis
+                    <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 1.79 4 4 4h8c0-2.21-1.79-4-4-4H4V7z"></path>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Curated Data Sources</h3>
+                <p class="feature-description">Access to ClinicalTrials.gov and Citeline TrialTrove databases</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Advanced Filtering</h3>
+                <p class="feature-description">Industry-standard filters for precise analysis</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Standardized Analysis</h3>
+                <p class="feature-description">Developed with Bain's Global HC LT expertise</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Insights Ready</h3>
+                <p class="feature-description">Generate customized trial data insights</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
