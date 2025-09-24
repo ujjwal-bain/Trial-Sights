@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from datetime import datetime, timedelta
 import time
 import uuid
+from filtering import apply_filters
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -53,8 +54,8 @@ def filters():
     # Available options
     phases = ['I', 'I/II', 'II', 'II/III', 'III', 'III/IV', 'IV', 'Others']
     study_designs = ['Interventional', 'Observational']
-    trial_statuses = ['Open', 'Closed', 'Temporarily Closed', 'Completed', 'Terminated']
-    lead_sponsor_types = ['Industry', 'Non-Industry', 'Unknown']
+    trial_statuses = ['Open', 'Closed', 'Temporarily Closed', 'Completed', 'Planned', 'Terminated']
+    lead_sponsor_types = ['Industry', 'Academic', 'Other']
     
     therapeutic_areas = [
         'Multiple', 'Oncology', 'CNS', 'Unassigned', 'Metabolic/Endocrinology',
@@ -116,8 +117,8 @@ def update_filters():
     filters['region_enabled'] = 'region_enabled' in request.form
     filters['region'] = request.form.get('region', 'Global')
     
-    filters['therapeutic_area_enabled'] = 'therapeutic_area_enabled' in request.form
-    filters['sponsor_enabled'] = 'sponsor_enabled' in request.form
+    # filters['therapeutic_area_enabled'] = 'therapeutic_area_enabled' in request.form
+    # filters['sponsor_enabled'] = 'sponsor_enabled' in request.form
     
     filters['data_source'] = request.form.get('data_source', 'ClinicalTrials.gov only')
     filters['scale_up_factor'] = int(request.form.get('scale_up_factor', 0))
@@ -136,6 +137,7 @@ def update_filters():
     filters['selected_sponsors'] = request.form.getlist('selected_sponsors')
     
     session['filters'] = filters
+
     return redirect(url_for('filters'))
 
 @app.route('/reset_filters', methods=['POST'])
@@ -150,6 +152,11 @@ def submit_request():
     session['request_id'] = request_id
     session['request_time'] = datetime.now()
     session['analysis_status'] = 'processing'
+
+    # apply_filters(input, filters)
+
+    filters = session.get('filters')
+    print("All filters stored in session:", filters)
     
     return redirect(url_for('results'))
 
@@ -168,11 +175,13 @@ def results():
 @app.route('/api/progress')
 def get_progress():
     # Simulate progress for the analysis
+    session['request_time'] = datetime.now().timestamp()
+
     if 'request_time' not in session:
         return jsonify({'progress': 0, 'status': 'processing', 'step': 'Initializing...'})
     
     request_time = session['request_time']
-    elapsed = (datetime.now() - request_time).total_seconds()
+    elapsed = datetime.now().timestamp() - request_time
     
     steps = [
         'Initializing analysis...',

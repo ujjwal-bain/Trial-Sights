@@ -20,20 +20,19 @@
                     <h2 class="section-title">Data Source</h2>
                     <p class="section-description">Choose your preferred data source for analysis</p>
                 </div>
-                
+
                 <div class="data-source-grid">
                     {% for source in data_sources %}
                     <label class="data-source-option">
-                        <input type="radio" name="data_source" value="{{ source }}" 
-                               {% if filters.data_source == source %}checked{% endif %}
-                               onchange="toggleCsvInput(this.value)">
+                        <input type="radio" name="data_source" value="{{ source }}" {% if filters.data_source==source
+                            %}checked{% endif %} onchange="toggleCsvInput(this.value)">
                         <div class="option-content">
                             <span class="option-title">{{ source }}</span>
                         </div>
                     </label>
                     {% endfor %}
                 </div>
-                
+
                 <!-- Dynamic CSV input that appears for options 2, 3, and 4 -->
                 <div id="csv-upload" class="csv-upload-section" style="display: none;">
                     <label class="csv-label">
@@ -41,7 +40,9 @@
                         <input type="file" name="csv_file" accept=".csv" class="csv-input">
                         <div class="file-input-display">
                             <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                </path>
                             </svg>
                             <span class="file-text">Choose CSV file or drag and drop</span>
                         </div>
@@ -62,7 +63,9 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
                                 </svg>
                             </div>
                             <div>
@@ -77,14 +80,16 @@
                                 <div class="date-selects">
                                     <select name="start_date_from_month" class="select-input">
                                         {% for month in months %}
-                                        <option value="{{ month.value }}" {% if filters.start_date_from_month == month.value %}selected{% endif %}>
+                                        <option value="{{ month.value }}" {% if
+                                            filters.start_date_from_month==month.value %}selected{% endif %}>
                                             {{ month.label }}
                                         </option>
                                         {% endfor %}
                                     </select>
                                     <select name="start_date_from_year" class="select-input">
                                         {% for year in years %}
-                                        <option value="{{ year }}" {% if filters.start_date_from_year == year %}selected{% endif %}>
+                                        <option value="{{ year }}" {% if filters.start_date_from_year==year %}selected{%
+                                            endif %}>
                                             {{ year }}
                                         </option>
                                         {% endfor %}
@@ -97,14 +102,16 @@
                                 <div class="date-selects">
                                     <select name="start_date_until_month" class="select-input">
                                         {% for month in months %}
-                                        <option value="{{ month.value }}" {% if filters.start_date_until_month == month.value %}selected{% endif %}>
+                                        <option value="{{ month.value }}" {% if
+                                            filters.start_date_until_month==month.value %}selected{% endif %}>
                                             {{ month.label }}
                                         </option>
                                         {% endfor %}
                                     </select>
                                     <select name="start_date_until_year" class="select-input">
                                         {% for year in years %}
-                                        <option value="{{ year }}" {% if filters.start_date_until_year == year %}selected{% endif %}>
+                                        <option value="{{ year }}" {% if filters.start_date_until_year==year
+                                            %}selected{% endif %}>
                                             {{ year }}
                                         </option>
                                         {% endfor %}
@@ -119,7 +126,9 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
                                 </svg>
                             </div>
                             <div>
@@ -129,15 +138,10 @@
                         </div>
 
                         <div class="filter-content">
-                            <div class="checkbox-group">
-                                <input type="checkbox" name="region_enabled" id="region_enabled" 
-                                       {% if filters.region_enabled %}checked{% endif %} class="checkbox-input">
-                                <label for="region_enabled" class="checkbox-label">Enable region filter</label>
-                            </div>
-
                             <select name="region" class="select-input">
                                 {% for region in regions %}
-                                <option value="{{ region.value }}" {% if filters.region == region.value %}selected{% endif %}>
+                                <option value="{{ region.value }}" {% if filters.region==region.value %}selected{% endif
+                                    %}>
                                     {{ region.label }}
                                 </option>
                                 {% endfor %}
@@ -150,7 +154,9 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                    </path>
                                 </svg>
                             </div>
                             <div>
@@ -163,7 +169,7 @@
                             {% for phase in phases %}
                             <div class="checkbox-group">
                                 <input type="checkbox" name="selected_phases" value="{{ phase }}" id="phase_{{ phase }}"
-                                       {% if phase in filters.selected_phases %}checked{% endif %} class="checkbox-input">
+                                    {% if phase in filters.selected_phases %}checked{% endif %} class="checkbox-input">
                                 <label for="phase_{{ phase }}" class="checkbox-label">{{ phase }}</label>
                             </div>
                             {% endfor %}
@@ -175,7 +181,9 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
                                 </svg>
                             </div>
                             <div>
@@ -187,8 +195,9 @@
                         <div class="checkbox-grid">
                             {% for design in study_designs %}
                             <div class="checkbox-group">
-                                <input type="checkbox" name="selected_study_designs" value="{{ design }}" id="design_{{ design }}"
-                                       {% if design in filters.selected_study_designs %}checked{% endif %} class="checkbox-input">
+                                <input type="checkbox" name="selected_study_designs" value="{{ design }}"
+                                    id="design_{{ design }}" {% if design in filters.selected_study_designs %}checked{%
+                                    endif %} class="checkbox-input">
                                 <label for="design_{{ design }}" class="checkbox-label">{{ design }}</label>
                             </div>
                             {% endfor %}
@@ -200,7 +209,8 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
                             <div>
@@ -212,8 +222,9 @@
                         <div class="checkbox-grid">
                             {% for status in trial_statuses %}
                             <div class="checkbox-group">
-                                <input type="checkbox" name="selected_trial_statuses" value="{{ status }}" id="status_{{ status }}"
-                                       {% if status in filters.selected_trial_statuses %}checked{% endif %} class="checkbox-input">
+                                <input type="checkbox" name="selected_trial_statuses" value="{{ status }}"
+                                    id="status_{{ status }}" {% if status in filters.selected_trial_statuses %}checked{%
+                                    endif %} class="checkbox-input">
                                 <label for="status_{{ status }}" class="checkbox-label">{{ status }}</label>
                             </div>
                             {% endfor %}
@@ -225,7 +236,9 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
                                 </svg>
                             </div>
                             <div>
@@ -237,8 +250,65 @@
                         <div class="checkbox-grid">
                             {% for sponsor in lead_sponsor_types %}
                             <div class="checkbox-group">
-                                <input type="checkbox" name="selected_lead_sponsor_types" value="{{ sponsor }}" id="sponsor_{{ sponsor }}"
-                                       {% if sponsor in filters.selected_lead_sponsor_types %}checked{% endif %} class="checkbox-input">
+                                <input type="checkbox" name="selected_lead_sponsor_types" value="{{ sponsor }}"
+                                    id="sponsor_{{ sponsor }}" {% if sponsor in filters.selected_lead_sponsor_types
+                                    %}checked{% endif %} class="checkbox-input">
+                                <label for="sponsor_{{ sponsor }}" class="checkbox-label">{{ sponsor }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Therapeutic Area Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="filter-title">Therapeutic Area</h3>
+                                <p class="filter-description">Select therapeutic focus areas</p>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-grid">
+                            {% for area in therapeutic_areas %}
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="selected_therapeutic_areas" value="{{ area }}"
+                                    id="area_{{ area }}" {% if area in filters.selected_therapeutic_areas %}checked{%
+                                    endif %} class="checkbox-input">
+                                <label for="area_{{ area }}" class="checkbox-label">{{ area }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Sponsors Filter -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <div class="filter-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="filter-title">Sponsor(s)</h3>
+                                <p class="filter-description">Select specific trial sponsors</p>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-grid">
+                            {% for sponsor in major_sponsors %}
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="selected_major_sponsors" value="{{ sponsor }}"
+                                    id="sponsor_{{ sponsor }}" {% if sponsor in filters.selected_major_sponsors %}checked{%
+                                    endif %} class="checkbox-input">
                                 <label for="sponsor_{{ sponsor }}" class="checkbox-label">{{ sponsor }}</label>
                             </div>
                             {% endfor %}
@@ -250,7 +320,9 @@
                         <div class="filter-header">
                             <div class="filter-icon">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
                                 </svg>
                             </div>
                             <div>
@@ -260,8 +332,9 @@
                         </div>
 
                         <div class="range-input-group">
-                            <input type="range" name="scale_up_factor" min="0" max="25" value="{{ filters.scale_up_factor }}" 
-                                   class="range-input" oninput="updateRangeValue(this)">
+                            <input type="range" name="scale_up_factor" min="0" max="25"
+                                value="{{ filters.scale_up_factor }}" class="range-input"
+                                oninput="updateRangeValue(this)">
                             <div class="range-labels">
                                 <span>0%</span>
                                 <span id="range-value" class="range-current">{{ filters.scale_up_factor }}%</span>
@@ -286,27 +359,27 @@
 
 <!-- Added JavaScript for dynamic CSV input and range slider -->
 <script>
-function toggleCsvInput(dataSource) {
-    const csvUpload = document.getElementById('csv-upload');
-    const requiresCsv = ['CT + TT (Phase 1)', 'CT + TT (Industry)', 'Citeline TrialTrove only'];
-    
-    if (requiresCsv.includes(dataSource)) {
-        csvUpload.style.display = 'block';
-    } else {
-        csvUpload.style.display = 'none';
-    }
-}
+    function toggleCsvInput(dataSource) {
+        const csvUpload = document.getElementById('csv-upload');
+        const requiresCsv = ['CT + TT (Phase 1)', 'CT + TT (Industry)', 'Citeline TrialTrove only'];
 
-function updateRangeValue(input) {
-    document.getElementById('range-value').textContent = input.value + '%';
-}
-
-// Initialize CSV input visibility on page load
-document.addEventListener('DOMContentLoaded', function() {
-    const selectedDataSource = document.querySelector('input[name="data_source"]:checked');
-    if (selectedDataSource) {
-        toggleCsvInput(selectedDataSource.value);
+        if (requiresCsv.includes(dataSource)) {
+            csvUpload.style.display = 'block';
+        } else {
+            csvUpload.style.display = 'none';
+        }
     }
-});
+
+    function updateRangeValue(input) {
+        document.getElementById('range-value').textContent = input.value + '%';
+    }
+
+    // Initialize CSV input visibility on page load
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectedDataSource = document.querySelector('input[name="data_source"]:checked');
+        if (selectedDataSource) {
+            toggleCsvInput(selectedDataSource.value);
+        }
+    });
 </script>
 {% endblock %}
