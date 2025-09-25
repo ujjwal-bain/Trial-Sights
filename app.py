@@ -1,12 +1,9 @@
 import argparse
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-<<<<<<< Updated upstream
 from datetime import datetime, timedelta
 import time
 import uuid
 from filtering import apply_filters
-=======
-from datetime import datetime
 from functools import lru_cache
 import pandas as pd
 from TT_Read_Clean import TT_Cleaning
@@ -14,7 +11,6 @@ from CT_GOV_Read_Clean import CT_GOV_Cleaning
 from Join_Union import run_join_operation
 from Lead_Sponsor import add_lead_sponsor
 from Revenue_Mapping import map_revenue
->>>>>>> Stashed changes
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -45,12 +41,11 @@ def load_clean_data() -> tuple:
     ct_df = CT_GOV_Cleaning(csv_path=app.config['CT_CSV_PATH'], output_path=app.config.get('CT_OUTPUT_PATH'))
     return tt_df, ct_df
 
-<<<<<<< Updated upstream
-@app.route('/filters')
-def filters():
-    # Initialize session with default filters if not present
-    if 'filters' not in session:
-        session['filters'] = DEFAULT_FILTERS.copy()
+# @app.route('/filters')
+# def filters():
+#     # Initialize session with default filters if not present
+#     if 'filters' not in session:
+#         session['filters'] = DEFAULT_FILTERS.copy()
     
     # Generate months and years for dropdowns
     months = [
@@ -116,7 +111,8 @@ def filters():
                          regions=regions,
                          current_year=datetime.now().year,
                          current_month=datetime.now().month)
-=======
+
+
 def _get_opt_bool(name: str):
     """
     Returns:
@@ -139,7 +135,6 @@ def _get_opt_bool(name: str):
     if s in ("1", "true", "t", "yes", "on"):   return True
     if s in ("0", "false", "f", "no", "off"):  return False
     return None
->>>>>>> Stashed changes
 
 @app.route("/run", methods=["GET"])
 def run_pipeline():
@@ -150,39 +145,37 @@ def run_pipeline():
     sponsor_academic  = _get_opt_bool("sponsor_academic")
     sponsor_others    = _get_opt_bool("sponsor_others")
     
-<<<<<<< Updated upstream
     # Update basic fields
-    filters['start_date_from_month'] = int(request.form.get('start_date_from_month', 1))
-    filters['start_date_from_year'] = int(request.form.get('start_date_from_year', 2015))
-    filters['start_date_until_month'] = int(request.form.get('start_date_until_month', 1))
-    filters['start_date_until_year'] = int(request.form.get('start_date_until_year', 2015))
+    # filters['start_date_from_month'] = int(request.form.get('start_date_from_month', 1))
+    # filters['start_date_from_year'] = int(request.form.get('start_date_from_year', 2015))
+    # filters['start_date_until_month'] = int(request.form.get('start_date_until_month', 1))
+    # filters['start_date_until_year'] = int(request.form.get('start_date_until_year', 2015))
     
-    filters['region_enabled'] = 'region_enabled' in request.form
-    filters['region'] = request.form.get('region', 'Global')
+    # filters['region_enabled'] = 'region_enabled' in request.form
+    # filters['region'] = request.form.get('region', 'Global')
     
-    # filters['therapeutic_area_enabled'] = 'therapeutic_area_enabled' in request.form
-    # filters['sponsor_enabled'] = 'sponsor_enabled' in request.form
+    # # filters['therapeutic_area_enabled'] = 'therapeutic_area_enabled' in request.form
+    # # filters['sponsor_enabled'] = 'sponsor_enabled' in request.form
     
-    filters['data_source'] = request.form.get('data_source', 'ClinicalTrials.gov only')
-    filters['scale_up_factor'] = int(request.form.get('scale_up_factor', 0))
+    # filters['data_source'] = request.form.get('data_source', 'ClinicalTrials.gov only')
+    # filters['scale_up_factor'] = int(request.form.get('scale_up_factor', 0))
     
-    if 'csv_file' in request.files:
-        csv_file = request.files['csv_file']
-        if csv_file.filename != '':
-            filters['csv_file'] = csv_file.filename
+    # if 'csv_file' in request.files:
+    #     csv_file = request.files['csv_file']
+    #     if csv_file.filename != '':
+    #         filters['csv_file'] = csv_file.filename
     
-    # Handle multi-select fields
-    filters['selected_phases'] = request.form.getlist('selected_phases')
-    filters['selected_study_designs'] = request.form.getlist('selected_study_designs')
-    filters['selected_trial_statuses'] = request.form.getlist('selected_trial_statuses')
-    filters['selected_lead_sponsor_types'] = request.form.getlist('selected_lead_sponsor_types')
-    filters['selected_therapeutic_areas'] = request.form.getlist('selected_therapeutic_areas')
-    filters['selected_sponsors'] = request.form.getlist('selected_sponsors')
+    # # Handle multi-select fields
+    # filters['selected_phases'] = request.form.getlist('selected_phases')
+    # filters['selected_study_designs'] = request.form.getlist('selected_study_designs')
+    # filters['selected_trial_statuses'] = request.form.getlist('selected_trial_statuses')
+    # filters['selected_lead_sponsor_types'] = request.form.getlist('selected_lead_sponsor_types')
+    # filters['selected_therapeutic_areas'] = request.form.getlist('selected_therapeutic_areas')
+    # filters['selected_sponsors'] = request.form.getlist('selected_sponsors')
     
-    session['filters'] = filters
+    # session['filters'] = filters
 
-    return redirect(url_for('filters'))
-=======
+    # return redirect(url_for('filters'))
     Left_only_TT_CT, Join_TT_CT, Union_TT_CT = run_join_operation(
         tt_df,
         ct_df,
@@ -193,72 +186,69 @@ def run_pipeline():
         output_union_path=app.config.get("MERGE_UNION_PATH"),
         debug=True, study_interventional=study_interventional, study_observational=study_observational,
         sponsor_industry=sponsor_industry, sponsor_academic=sponsor_academic, sponsor_others=sponsor_others)
->>>>>>> Stashed changes
 
     union_with_lead = add_lead_sponsor(Union_TT_CT, output_path=app.config.get("LEAD_SPONSOR_PATH"))
 
-<<<<<<< Updated upstream
-@app.route('/submit_request', methods=['POST'])
-def submit_request():
-    # Generate a unique request ID
-    request_id = str(uuid.uuid4())[:8]
-    session['request_id'] = request_id
-    session['request_time'] = datetime.now()
-    session['analysis_status'] = 'processing'
+# @app.route('/submit_request', methods=['POST'])
+# def submit_request():
+#     # Generate a unique request ID
+#     request_id = str(uuid.uuid4())[:8]
+#     session['request_id'] = request_id
+#     session['request_time'] = datetime.now()
+#     session['analysis_status'] = 'processing'
 
-    # apply_filters(input, filters)
+#     # apply_filters(input, filters)
 
-    filters = session.get('filters')
-    print("All filters stored in session:", filters)
+#     filters = session.get('filters')
+#     print("All filters stored in session:", filters)
     
-    return redirect(url_for('results'))
+#     return redirect(url_for('results'))
 
-@app.route('/results')
-def results():
-    if 'request_id' not in session:
-        return redirect(url_for('filters'))
+# @app.route('/results')
+# def results():
+#     if 'request_id' not in session:
+#         return redirect(url_for('filters'))
     
-    request_time = session.get('request_time', datetime.now())
-    request_id = session.get('request_id', '12345')
+#     request_time = session.get('request_time', datetime.now())
+#     request_id = session.get('request_id', '12345')
     
-    return render_template('results.html', 
-                         request_time=request_time,
-                         request_id=request_id)
+#     return render_template('results.html', 
+#                          request_time=request_time,
+#                          request_id=request_id)
 
-@app.route('/api/progress')
-def get_progress():
-    # Simulate progress for the analysis
-    session['request_time'] = datetime.now().timestamp()
+# @app.route('/api/progress')
+# def get_progress():
+#     # Simulate progress for the analysis
+#     session['request_time'] = datetime.now().timestamp()
 
-    if 'request_time' not in session:
-        return jsonify({'progress': 0, 'status': 'processing', 'step': 'Initializing...'})
+#     if 'request_time' not in session:
+#         return jsonify({'progress': 0, 'status': 'processing', 'step': 'Initializing...'})
     
-    request_time = session['request_time']
-    elapsed = datetime.now().timestamp() - request_time
+#     request_time = session['request_time']
+#     elapsed = datetime.now().timestamp() - request_time
     
-    steps = [
-        'Initializing analysis...',
-        'Filtering trial data...',
-        'Applying regional filters...',
-        'Processing phase criteria...',
-        'Calculating scale-up factors...',
-        'Generating insights...',
-        'Finalizing results...'
-    ]
+#     steps = [
+#         'Initializing analysis...',
+#         'Filtering trial data...',
+#         'Applying regional filters...',
+#         'Processing phase criteria...',
+#         'Calculating scale-up factors...',
+#         'Generating insights...',
+#         'Finalizing results...'
+#     ]
     
-    # Simulate 2-3 minute processing time
-    total_time = 150  # 2.5 minutes
-    progress = min(100, (elapsed / total_time) * 100)
+#     # Simulate 2-3 minute processing time
+#     total_time = 150  # 2.5 minutes
+#     progress = min(100, (elapsed / total_time) * 100)
     
-    if progress >= 100:
-        status = 'ready'
-        step = 'Analysis complete!'
-    else:
-        status = 'processing'
-        step_index = min(len(steps) - 1, int((progress / 100) * len(steps)))
-        step = steps[step_index]
+#     if progress >= 100:
+#         status = 'ready'
+#         step = 'Analysis complete!'
+#     else:
+#         status = 'processing'
+#         step_index = min(len(steps) - 1, int((progress / 100) * len(steps)))
+#         step = steps[step_index]
     
-=======
     rev_df = map_revenue(
         union_with_lead,
         map1_path=app.config["REV_MAP1_PATH"],
@@ -274,7 +264,6 @@ def get_progress():
     )
 
     # next steps: merge/map/apply filters; for now just return sizes
->>>>>>> Stashed changes
     return jsonify({
         "tt_rows": len(tt_df),
         "tt_cols": len(tt_df.columns),
@@ -301,12 +290,12 @@ def get_progress():
         "sponsor_others":   sponsor_others})
 
 # Example: use cleaned data when showing results
-@app.route("/results")
-def results():
-    # ensure you have whatever session state you want here
-    tt_df, ct_df = load_clean_data()
-    # TODO: apply filters / merge / compute summary
-    return render_template("results.html", request_time=datetime.now(), request_id="demo-123")
+# @app.route("/results")
+# def results():
+#     # ensure you have whatever session state you want here
+#     tt_df, ct_df = load_clean_data()
+#     # TODO: apply filters / merge / compute summary
+#     return render_template("results.html", request_time=datetime.now(), request_id="demo-123")
 
 
 
